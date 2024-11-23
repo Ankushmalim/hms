@@ -26,7 +26,11 @@ public class SecurityConfig {
        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         //haap
-        http.authorizeHttpRequests().anyRequest().permitAll();
+       // http.authorizeHttpRequests().anyRequest().permitAll();
+        http.authorizeHttpRequests().
+                requestMatchers("/api/v1/users/login","/api/v1/users/signup")
+                .permitAll()
+                .anyRequest().authenticated();
 
         return http.build();
     }
